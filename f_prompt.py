@@ -1,4 +1,6 @@
 from langchain.prompts import ChatPromptTemplate
+
+# defining prompt with query context and history
 def f_prompt(query,context,history,):
     rag='''
 *** ROLE: You are a knowledable and kind assistant that help the user with his queries related to Government policies. You should talk to user like a human and not like a bot.
@@ -57,6 +59,7 @@ Don't show the steps that you used to answer the question only return the answer
 
 
 '''
+# using function chatpromttemplate to convert above text in prompt template
     prompt_template = ChatPromptTemplate.from_template(rag)
     prompt = prompt_template.format_messages(
             query=query,
@@ -64,4 +67,4 @@ Don't show the steps that you used to answer the question only return the answer
             history=history,
             
         )
-    return prompt
+    return prompt #returning a prompt

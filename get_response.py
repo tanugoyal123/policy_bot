@@ -8,11 +8,12 @@ load_dotenv()
 
 os.environ['HF_TOKEN']= os.getenv("HF_TOKEN")
 
+# function for getting output of the query asked by user
 def get_response(query,history):
-    context_rag=get_retriever_tool(query)
-    context_wiki = wiki_tool(query)
-    final_context=context_rag+context_wiki
-    final_prompt=f_prompt(query,final_context,history)
-    llm=get_llm()
-    response=llm.invoke(final_prompt)
-    return response
+    context_rag=get_retriever_tool(query) # fetching rag context using get retriever tool functionfrom rag_tool file
+    context_wiki = wiki_tool(query) # fetching wikipedia context using wiki_tool function from wiki tool file
+    final_context=context_rag+context_wiki # combining both the context
+    final_prompt=f_prompt(query,final_context,history) # using the combined context in prompt
+    llm=get_llm() # loading llm
+    response=llm.invoke(final_prompt) # invoke the llm and get output
+    return response # return the final response from the llm
